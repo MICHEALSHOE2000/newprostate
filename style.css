@@ -153,6 +153,64 @@ a {
   background: #39294d;
 }
 
+
+.hero-proof {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin: 15px 0;
+  font-size: 0.95em;
+}
+.hero-proof span {
+  background: #ffffff;
+  border: 1px solid #e8dff7;
+  border-radius: 20px;
+  padding: 6px 12px;
+}
+
+.trust-strip {
+  background: #2f2140;
+  color: #fff;
+  text-align: center;
+  padding: 14px 16px;
+}
+.trust-strip p { margin: 0; }
+
+.conversion-boosters {
+  padding: 30px 20px;
+  background: #f4fff8;
+}
+.booster-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
+}
+.booster-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 16px;
+  border: 1px solid #d9f1e2;
+}
+.booster-card h3 {
+  text-align: left;
+  margin-top: 0;
+  margin-bottom: 8px;
+  font-size: 1.1em;
+}
+.form-intro, .bundle-tip, .checkout-trust {
+  font-size: 0.95em;
+  color: #555;
+}
+.bundle-tip {
+  margin-top: -5px;
+  margin-bottom: 10px;
+}
+.checkout-trust {
+  text-align: center;
+  margin-top: 12px;
+}
+
 /* Sticky CTA */
 #sticky-cta {
   position: fixed;
