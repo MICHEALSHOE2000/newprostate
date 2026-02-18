@@ -6,6 +6,7 @@ body {
   color: #333;
   line-height: 1.6;
   padding-bottom: 80px; /* makes room for sticky CTA */
+  padding-top: 46px; /* room for trust-top-bar */
 }
  img {
   width: 100%;
@@ -88,6 +89,65 @@ a {
   font-weight: bold;
   text-align: center;
 }
+
+.offer-stack {
+  background: #fff;
+  border: 2px solid #f4c67a;
+  border-radius: 12px;
+  padding: 14px;
+  max-width: 620px;
+  margin: 0 auto 12px;
+}
+
+.offer-stack h3,
+.offer-stack h4 {
+  margin: 0 0 8px;
+}
+
+.offer-stack__bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 12px;
+}
+
+.offer-stack__bullets li {
+  margin: 5px 0;
+}
+
+.offer-stack__value {
+  background: #fff9ef;
+  border: 1px dashed #d8a650;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 12px;
+}
+
+.offer-stack__value p {
+  display: flex;
+  justify-content: space-between;
+  margin: 4px 0;
+  font-weight: 600;
+}
+
+.offer-stack__value p.total {
+  margin-top: 8px;
+  border-top: 1px solid #e9d3ad;
+  padding-top: 8px;
+  color: #8c2a00;
+}
+
+.offer-stack__today {
+  text-align: center;
+  background: #ecfff2;
+  border: 1px solid #b7ebc5;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.offer-stack__today p {
+  margin: 5px 0;
+}
+
 #countdown {
   text-align: center;
   font-size: 1.4em;
@@ -123,6 +183,7 @@ a {
   margin: auto;
   display: flex;
   flex-direction: column;
+  gap: 10px;
 }
 .form label {
   margin-bottom: 5px;
@@ -139,6 +200,32 @@ a {
 .form input[type="radio"] {
   margin-right: 10px;
 }
+
+.order-form-card {
+  background: #fff;
+  padding: 18px;
+  border: 1px solid #e7e7e7;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group textarea {
+  padding: 10px;
+  margin-bottom: 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-family: inherit;
+}
+
+.primary-submit-btn {
+  margin-top: 10px;
+}
 .form button {
   padding: 12px;
   background: #4e3a61;
@@ -151,6 +238,111 @@ a {
 }
 .form button:hover {
   background: #39294d;
+}
+
+.trust-top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #114b27;
+  color: #fff;
+  z-index: 1001;
+  font-size: 0.86rem;
+}
+
+.trust-top-bar__content {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  padding: 8px 12px;
+}
+
+.live-proof-widget {
+  margin-top: 18px;
+  display: inline-block;
+  text-align: left;
+  background: #ffffff;
+  border: 2px solid #e2f3e8;
+  border-radius: 10px;
+  padding: 8px 14px;
+  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.08);
+}
+
+.live-proof-widget p {
+  margin: 4px 0;
+  color: #1f5130;
+  font-size: 0.95rem;
+}
+
+.form-trust-signals {
+  background: #eef9f0;
+  border: 1px solid #caebd2;
+  border-radius: 8px;
+  padding: 8px 12px;
+  margin-bottom: 14px;
+}
+
+.form-trust-signals p {
+  margin: 6px 0;
+  font-size: 0.95rem;
+}
+
+.form-progress {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+}
+
+.form-progress span {
+  flex: 1;
+  background: #ece7f5;
+  color: #4e3a61;
+  border-radius: 18px;
+  padding: 6px 10px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.form-progress span.active {
+  background: #4e3a61;
+  color: #fff;
+}
+
+.form-progress span.done {
+  background: #d8f3df;
+  color: #1f5130;
+}
+
+.form-helper-text {
+  margin: 0 0 12px;
+  color: #555;
+  font-size: 0.92rem;
+}
+
+.form-step-2 {
+  border-top: 2px dashed #ddd;
+  margin-top: 12px;
+  padding-top: 14px;
+}
+
+.inline-form-error {
+  color: #a91f1f;
+  font-size: 0.92rem;
+  margin: 2px 0 10px;
+}
+
+.final-submit-btn {
+  margin-top: 12px;
+  background: #0f7f3f !important;
+}
+
+.final-submit-btn:hover {
+  background: #0a6732 !important;
 }
 
 /* Sticky CTA */
@@ -430,5 +622,22 @@ footer {
 @keyframes fadeInUp {
   from { transform: translateY(20px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
+}
+
+@media (max-width: 640px) {
+  body {
+    padding-top: 72px;
+  }
+
+  .trust-top-bar__content {
+    justify-content: flex-start;
+    gap: 6px;
+    font-size: 0.76rem;
+  }
+
+  .live-proof-widget {
+    width: 100%;
+    text-align: center;
+  }
 }
 
