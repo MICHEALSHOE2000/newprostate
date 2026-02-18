@@ -140,90 +140,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // === Conversion Booster: realistic, verifiable reviews ===
-  function enhanceTestimonials() {
-    const section = document.querySelector('.testimonials');
-    if (!section || section.querySelector('.verified-reviews-grid')) return;
-
-    const reviews = document.createElement('div');
-    reviews.className = 'verified-reviews-grid';
-    reviews.innerHTML = `
-      <article class="verified-review-card">
-        <img src="img/police.png" alt="Verified customer Chinedu Okoro" class="verified-review-avatar" />
-        <div>
-          <h4>Chinedu Okoro <span>• Verified Buyer</span></h4>
-          <p class="verified-meta">Port Harcourt • Ordered 3 Bottles • Reviewed on 14 Jan 2026</p>
-          <p>“By week 3, night urination dropped from 6 times to 1–2 times. My sleep and strength came back. The support team also checked in on WhatsApp every few days.”</p>
-          <p class="verified-id">Order Ref: PW-48217</p>
-        </div>
-      </article>
-
-      <article class="verified-review-card">
-        <img src="img/utre.jpg" alt="Verified customer Olabode Samuel" class="verified-review-avatar" />
-        <div>
-          <h4>Olabode Samuel <span>• Verified Buyer</span></h4>
-          <p class="verified-meta">Ibadan • Ordered 2 Bottles • Reviewed on 29 Dec 2025</p>
-          <p>“I was preparing for surgery but wanted one more natural option first. After consistent use, urine flow improved and the pain reduced a lot. Delivery was fast too.”</p>
-          <p class="verified-id">Order Ref: PW-46903</p>
-        </div>
-      </article>
-
-      <article class="verified-review-card">
-        <img src="img/Screenshot.png" alt="Verified customer Ibrahim Musa" class="verified-review-avatar" />
-        <div>
-          <h4>Ibrahim Musa <span>• Verified Buyer</span></h4>
-          <p class="verified-meta">Abuja • Ordered 3 Bottles • Reviewed on 08 Jan 2026</p>
-          <p>“After 45 days, urgency and weak stream improved significantly. What made me trust the process was the clear dosage guide and follow-up reminders.”</p>
-          <p class="verified-id">Order Ref: PW-47751</p>
-        </div>
-      </article>
-    `;
-
-    section.appendChild(reviews);
-  }
-
-  // === Conversion Booster: scientific trust + references ===
-  function injectScientificTrustSignals() {
-    const solutionSection = document.querySelector('.solution');
-    if (!solutionSection || solutionSection.querySelector('.science-trust-card')) return;
-
-    const science = document.createElement('div');
-    science.className = 'science-trust-card';
-    science.innerHTML = `
-      <h3>🔬 Why this protocol is science-informed</h3>
-      <ul>
-        <li>Clinical literature supports plant-based compounds for lower urinary tract symptom support in men with BPH.</li>
-        <li>Inflammation-focused prostate care is recommended in mainstream urology guidance for symptom control.</li>
-        <li>Lifestyle + consistent supplement adherence improves outcomes compared to irregular use.</li>
-      </ul>
-      <p class="science-links">
-        Medical references:
-        <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3326341/" target="_blank" rel="noopener noreferrer">NIH: Saw Palmetto Research</a> ·
-        <a href="https://www.mayoclinic.org/diseases-conditions/benign-prostatic-hyperplasia/diagnosis-treatment/drc-20370093" target="_blank" rel="noopener noreferrer">Mayo Clinic: BPH Treatment</a> ·
-        <a href="https://www.nhs.uk/conditions/prostate-enlargement/" target="_blank" rel="noopener noreferrer">NHS: Enlarged Prostate</a>
-      </p>
-      <p class="science-note">This product is a wellness support protocol and does not replace emergency or specialist medical care.</p>
-    `;
-
-    solutionSection.appendChild(science);
-  }
-
-  // === Conversion Booster: visible risk reversal proof ===
-  function injectRefundProof() {
-    const guarantee = document.querySelector('.guarantee');
-    if (!guarantee || guarantee.querySelector('.refund-proof-box')) return;
-
-    const proof = document.createElement('div');
-    proof.className = 'refund-proof-box';
-    proof.innerHTML = `
-      <h3>🛡️ Refund Protection, Documented</h3>
-      <p>If you use the product as directed and are not satisfied, request a refund within the guarantee period.</p>
-      <a href="refund-policy.html" target="_blank" rel="noopener noreferrer" class="refund-policy-link">View Refund Policy Document</a>
-    `;
-
-    guarantee.appendChild(proof);
-  }
-
   // === Countdown Timer (Evergreen so it never displays "ended") ===
   function countdown() {
     const key = 'prostateWelOfferExpiresAt';
@@ -252,9 +168,6 @@ document.addEventListener("DOMContentLoaded", function () {
   injectFormTrustSignals();
   injectOfferStack();
   structureOrderForms();
-  enhanceTestimonials();
-  injectScientificTrustSignals();
-  injectRefundProof();
   setInterval(countdown, 1000);
   countdown();
 
