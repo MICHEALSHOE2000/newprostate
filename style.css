@@ -89,6 +89,65 @@ a {
   font-weight: bold;
   text-align: center;
 }
+
+.offer-stack {
+  background: #fff;
+  border: 2px solid #f4c67a;
+  border-radius: 12px;
+  padding: 14px;
+  max-width: 620px;
+  margin: 0 auto 12px;
+}
+
+.offer-stack h3,
+.offer-stack h4 {
+  margin: 0 0 8px;
+}
+
+.offer-stack__bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 12px;
+}
+
+.offer-stack__bullets li {
+  margin: 5px 0;
+}
+
+.offer-stack__value {
+  background: #fff9ef;
+  border: 1px dashed #d8a650;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 12px;
+}
+
+.offer-stack__value p {
+  display: flex;
+  justify-content: space-between;
+  margin: 4px 0;
+  font-weight: 600;
+}
+
+.offer-stack__value p.total {
+  margin-top: 8px;
+  border-top: 1px solid #e9d3ad;
+  padding-top: 8px;
+  color: #8c2a00;
+}
+
+.offer-stack__today {
+  text-align: center;
+  background: #ecfff2;
+  border: 1px solid #b7ebc5;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.offer-stack__today p {
+  margin: 5px 0;
+}
+
 #countdown {
   text-align: center;
   font-size: 1.4em;
@@ -124,6 +183,7 @@ a {
   margin: auto;
   display: flex;
   flex-direction: column;
+  gap: 10px;
 }
 .form label {
   margin-bottom: 5px;
@@ -139,6 +199,32 @@ a {
 }
 .form input[type="radio"] {
   margin-right: 10px;
+}
+
+.order-form-card {
+  background: #fff;
+  padding: 18px;
+  border: 1px solid #e7e7e7;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group textarea {
+  padding: 10px;
+  margin-bottom: 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-family: inherit;
+}
+
+.primary-submit-btn {
+  margin-top: 10px;
 }
 .form button {
   padding: 12px;

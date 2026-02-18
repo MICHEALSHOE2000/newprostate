@@ -69,143 +69,107 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // === Conversion Booster: 2-step order form (reduces initial friction) ===
-  function enhanceOrderForms() {
+  // === Conversion Booster: structured offer stack ===
+  function injectOfferStack() {
+    const offerSection = document.querySelector('.offer');
+    if (!offerSection || offerSection.querySelector('.offer-stack')) return;
+
+    const offerStack = document.createElement('div');
+    offerStack.className = 'offer-stack';
+    offerStack.innerHTML = `
+      <h3>🔥 Best Value Protocol</h3>
+      <ul class="offer-stack__bullets">
+        <li>✅ 3 Bottles (Full 45 Day Protocol)</li>
+        <li>✅ Free Delivery</li>
+        <li>✅ Free Prostate Health Guide</li>
+        <li>✅ WhatsApp Follow-up Support</li>
+      </ul>
+
+      <div class="offer-stack__value">
+        <p><span>3 Bottles</span><strong>₦90,000</strong></p>
+        <p><span>Delivery</span><strong>₦5,000</strong></p>
+        <p><span>Guide</span><strong>₦10,000</strong></p>
+        <p><span>Support</span><strong>₦15,000</strong></p>
+        <p class="total"><span>Total Value</span><strong>₦120,000+</strong></p>
+      </div>
+
+      <div class="offer-stack__today">
+        <h4>But Today…</h4>
+        <p><strong>3 Bottles – ₦60,000</strong></p>
+        <p>2 Bottles – ₦45,000</p>
+        <p>1 Bottle – ₦25,000</p>
+      </div>
+    `;
+
+    const countdown = offerSection.querySelector('#countdown');
+    if (countdown) {
+      countdown.insertAdjacentElement('beforebegin', offerStack);
+    } else {
+      offerSection.appendChild(offerStack);
+    }
+  }
+
+  // === Conversion Booster: make form look structured ===
+  function structureOrderForms() {
     document.querySelectorAll('#orderForm').forEach(form => {
-      if (form.dataset.enhanced === 'true') return;
+      if (form.dataset.structured === 'true') return;
+      form.classList.add('order-form-card');
 
-      const primaryPhone = form.querySelector('#phone');
-      const altPhone = form.querySelector('#alt-phone');
-      const state = form.querySelector('#state');
-      const lga = form.querySelector('#lga');
-      const quantity = form.querySelector('#quantity');
-      const address = form.querySelector('#address');
+      const labels = [...form.querySelectorAll('label[for]')];
+      labels.forEach(label => {
+        const fieldId = label.getAttribute('for');
+        if (!fieldId) return;
+        const field = form.querySelector(`#${fieldId}`);
+        if (!field) return;
+
+        if (label.parentElement.classList.contains('form-group')) return;
+
+        const group = document.createElement('div');
+        group.className = 'form-group';
+        label.parentNode.insertBefore(group, label);
+        group.appendChild(label);
+        group.appendChild(field);
+      });
+
       const submitBtn = form.querySelector('button[type="submit"]');
-
-      if (!primaryPhone || !altPhone || !state || !lga || !quantity || !address || !submitBtn) {
-        return;
+      if (submitBtn) {
+        submitBtn.classList.add('primary-submit-btn');
       }
 
-
-      const advancedWrap = document.createElement('div');
-      advancedWrap.className = 'form-step-2';
-
-      const fields = [altPhone, state, lga, quantity, address];
-      fields.forEach(field => {
-        const label = form.querySelector(`label[for="${field.id}"]`);
-        if (label) advancedWrap.appendChild(label);
-        advancedWrap.appendChild(field);
-      });
-
-      submitBtn.textContent = 'Continue to Delivery Details';
-      submitBtn.type = 'button';
-
-      const progress = document.createElement('div');
-      progress.className = 'form-progress';
-      progress.innerHTML = '<span class="active">Step 1: Contact</span><span>Step 2: Delivery</span>';
-      form.prepend(progress);
-
-      const helper = document.createElement('p');
-      helper.className = 'form-helper-text';
-      helper.textContent = 'Fill your main details first. It takes less than 30 seconds.';
-      progress.insertAdjacentElement('afterend', helper);
-
-
-      fields.forEach(field => {
-        if (field.required) {
-          field.dataset.wasRequired = 'true';
-          field.required = false;
-        }
-      });
-
-      // Move step 2 fields into wrapper
-      const firstStep2Label = form.querySelector('label[for="alt-phone"]');
-      if (firstStep2Label) {
-        firstStep2Label.parentNode.insertBefore(advancedWrap, firstStep2Label);
-      } else {
-        form.insertBefore(advancedWrap, submitBtn);
-      }
-
-      advancedWrap.style.display = 'none';
-      form.insertBefore(submitBtn, advancedWrap);
-
-      const inlineError = document.createElement('p');
-      inlineError.className = 'inline-form-error';
-      inlineError.style.display = 'none';
-      submitBtn.insertAdjacentElement('beforebegin', inlineError);
-
-      const finalButton = document.createElement('button');
-      finalButton.type = 'submit';
-      finalButton.className = 'final-submit-btn';
-      finalButton.textContent = 'Submit Order Securely';
-      finalButton.style.display = 'none';
-      form.appendChild(finalButton);
-
-      submitBtn.addEventListener('click', () => {
-        const nameField = form.querySelector('#name');
-        const phoneField = form.querySelector('#phone');
-        const phoneRegex = /^\d{11}$/;
-
-        const nameOk = !!nameField?.value.trim();
-        const phoneOk = phoneRegex.test(phoneField?.value.trim() || '');
-
-        if (!nameOk || !phoneOk) {
-          inlineError.textContent = 'Enter your full name and a valid 11-digit phone number to continue.';
-          inlineError.style.display = 'block';
-          return;
-        }
-
-        inlineError.style.display = 'none';
-        advancedWrap.style.display = 'block';
-        fields.forEach(field => {
-          if (field.dataset.wasRequired === 'true') field.required = true;
-        });
-
-        progress.innerHTML = '<span class="done">Step 1: Contact ✓</span><span class="active">Step 2: Delivery</span>';
-        helper.textContent = 'Great. Add your delivery details and place your order.';
-        submitBtn.style.display = 'none';
-        finalButton.style.display = 'block';
-        advancedWrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      });
-
-      form.dataset.enhanced = 'true';
-
-      // Prevent accidental double-submit UX
-      form.addEventListener('submit', () => {
-        finalButton.disabled = true;
-        finalButton.textContent = 'Submitting...';
-      }, { once: true });
+      form.dataset.structured = 'true';
     });
+  }
+
+  // === Countdown Timer (Evergreen so it never displays "ended") ===
+  function countdown() {
+    const key = 'prostateWelOfferExpiresAt';
+    let expiry = Number(localStorage.getItem(key));
+    const now = Date.now();
+
+    if (!expiry || Number.isNaN(expiry) || expiry <= now) {
+      // Reset to 48h from now whenever missing or expired
+      expiry = now + (48 * 60 * 60 * 1000);
+      localStorage.setItem(key, String(expiry));
+    }
+
+    const diff = expiry - now;
+    const hours = Math.floor(diff / (1000 * 60 * 60));
+    const mins = Math.floor((diff / (1000 * 60)) % 60);
+    const secs = Math.floor((diff / 1000) % 60);
+
+    const countdownElement = document.getElementById('countdown');
+    if (countdownElement) {
+      countdownElement.innerHTML = `⏳ Offer closes in: <strong>${hours}h ${mins}m ${secs}s</strong>`;
+    }
   }
 
   injectTrustBar();
   injectSocialProof();
   injectFormTrustSignals();
-  enhanceOrderForms();
-
-  // === Countdown Timer ===
-  function countdown() {
-    const offerDate = new Date("2025-10-30T23:59:59");
-    const now = new Date();
-    const diff = offerDate - now;
-
-    if (diff <= 0) {
-      document.getElementById("countdown").textContent = "Offer ended!";
-      return;
-    }
-
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-    const mins = Math.floor((diff / (1000 * 60)) % 60);
-    const secs = Math.floor((diff / 1000) % 60);
-
-    const countdownElement = document.getElementById("countdown");
-    if (countdownElement) {
-      countdownElement.innerHTML = `${days}d ${hours}h ${mins}m ${secs}s`;
-    }
-  }
+  injectOfferStack();
+  structureOrderForms();
   setInterval(countdown, 1000);
-  countdown(); // run immediately
+  countdown();
 
 
   // === Smooth Scroll to Form ===
@@ -369,4 +333,3 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
 }); // END DOMContentLoaded
-
